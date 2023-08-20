@@ -21,8 +21,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.android.unscramble.R
 import com.example.android.unscramble.databinding.GameFragmentBinding
+
+// Todo: 前回コードラボの解答コードを使用しないとダメ。現状はベースコードが違う    
 
 /**
  * Fragment where the game is played, contains the game logic.
@@ -31,7 +35,11 @@ class GameFragment : Fragment() {
 
     private var score = 0
     private var currentWordCount = 0
-    private var currentScrambledWord = "test"
+
+    private var _currentScrambledWord = MutableLiveData<String>()
+    // Todo: get()を使わないとcurrentな値をとれないの確認
+    val currentScrambledWord: LiveData<String>
+        get() = _currentScrambledWord
 
 
     // Binding object instance with access to the views in the game_fragment.xml layout
